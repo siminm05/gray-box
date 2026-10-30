@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GrayBox</title>
+</head>
+<body>
+  <h1>GrayBox</h1>
+  <p>Basic grayscale image processing. Upload an image, choose an operation, and process it in your browser.</p>
+
+  <p>
+    <input type="file" id="imageFile" accept="image/png,image/jpeg,.pgm">
+  </p>
+
+  <p>
+    <label for="operation">Choose operation:</label>
+    <select id="operation">
+      <option value="0">Average filter (3x3)</option>
+      <option value="1">Mean filter (4x4)</option>
+      <option value="2">Median filter (3x3)</option>
+      <option value="3">Sobel edge detection</option>
+      <option value="4">Prewitt edge detection</option>
+      <option value="5">Local Binary Patterns (LBP)</option>
+      <option value="6">Resize (nearest neighbour)</option>
+    </select>
+    <label id="scaleLabel" hidden> Scale (%):
+      <input id="scale" type="number" min="50" max="300" value="150">
+    </label>
+    <button id="process" disabled>Process image</button>
+  </p>
+
+  <h2>Original image</h2>
+  <canvas id="original"></canvas>
+
+  <h2>Processed image</h2>
+  <canvas id="processed"></canvas>
+
+  <p><button id="download" disabled>Download processed image (PGM)</button></p>
+  <p id="message">Upload a PNG, JPG or PGM image to begin.</p>
+
+  <script src="app.js"></script>
+</body>
+</html>

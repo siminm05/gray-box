@@ -1,43 +1,111 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GrayBox</title>
+  <meta name="description" content="A simple browser-based grayscale image processing tool.">
+  <title>GrayBox — Image Processing</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>GrayBox</h1>
-  <p>Basic grayscale image processing. Upload an image, choose an operation, and process it in your browser.</p>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="GrayBox home">
+        <span class="brand-mark">G</span>
+        <span>GrayBox</span>
+      </a>
+      <span class="header-note">A simple image processing tool</span>
+    </div>
+  </header>
 
-  <p>
-    <input type="file" id="imageFile" accept="image/png,image/jpeg,.pgm">
-  </p>
+  <main class="page">
+    <section class="intro">
+      <p class="eyebrow">IMAGE PROCESSING</p>
+      <div class="intro-content">
+        <h1>Give your images a closer look.</h1>
+        <p class="intro-copy">Upload an image, choose an operation, and see what changes. Everything runs locally in your browser.</p>
+      </div>
+    </section>
 
-  <p>
-    <label for="operation">Choose operation:</label>
-    <select id="operation">
-      <option value="0">Average filter (3x3)</option>
-      <option value="1">Mean filter (4x4)</option>
-      <option value="2">Median filter (3x3)</option>
-      <option value="3">Sobel edge detection</option>
-      <option value="4">Prewitt edge detection</option>
-      <option value="5">Local Binary Patterns (LBP)</option>
-      <option value="6">Resize (nearest neighbour)</option>
-    </select>
-    <label id="scaleLabel" hidden> Scale (%):
-      <input id="scale" type="number" min="50" max="300" value="150">
-    </label>
-    <button id="process" disabled>Process image</button>
-  </p>
+    <section class="workspace" aria-label="Image processing controls">
+      <div class="section-heading">
+        <div>
+          <h2>Get started</h2>
+          <p>Choose an image and an operation.</p>
+        </div>
+        <span class="step-label">01 / INPUT</span>
+      </div>
 
-  <h2>Original image</h2>
-  <canvas id="original"></canvas>
+      <div class="control-grid">
+        <div class="control-group upload-group">
+          <label class="field-label" for="imageFile">Your image</label>
+          <input type="file" id="imageFile" accept="image/png,image/jpeg,.pgm">
+          <p class="hint">PNG, JPG or PGM</p>
+        </div>
 
-  <h2>Processed image</h2>
-  <canvas id="processed"></canvas>
+        <div class="control-group">
+          <label class="field-label" for="operation">Operation</label>
+          <select id="operation">
+            <option value="0">Average filter (3×3)</option>
+            <option value="1">Mean filter (4×4)</option>
+            <option value="2">Median filter (3×3)</option>
+            <option value="3">Sobel edge detection</option>
+            <option value="4">Prewitt edge detection</option>
+            <option value="5">Local Binary Patterns (LBP)</option>
+            <option value="6">Resize (nearest neighbour)</option>
+          </select>
+          <label id="scaleLabel" class="scale-control" hidden>Scale (%)
+            <input id="scale" type="number" min="50" max="300" value="150">
+          </label>
+        </div>
+      </div>
 
-  <p><button id="download" disabled>Download processed image (PGM)</button></p>
-  <p id="message">Upload a PNG, JPG or PGM image to begin.</p>
+      <div class="action-row">
+        <button id="process" class="button button-primary" disabled>Process image <span aria-hidden="true">→</span></button>
+        <button id="download" class="button button-secondary" disabled>Download result</button>
+      </div>
+      <p id="message" class="status" role="status" aria-live="polite">Upload a PNG, JPG or PGM image to begin.</p>
+    </section>
+
+    <section class="results" aria-label="Image results">
+      <div class="section-heading">
+        <div>
+          <h2>Preview</h2>
+          <p>Your original and processed images will appear here.</p>
+        </div>
+        <span class="step-label">02 / RESULT</span>
+      </div>
+
+      <div class="preview-grid">
+        <article class="preview-card">
+          <div class="preview-heading">
+            <h3>Original image</h3>
+            <span>INPUT</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="original" aria-label="Original grayscale image preview"></canvas>
+            <p class="empty-state">Your uploaded image will appear here.</p>
+          </div>
+        </article>
+
+        <article class="preview-card">
+          <div class="preview-heading">
+            <h3>Processed image</h3>
+            <span>OUTPUT</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="processed" aria-label="Processed image preview"></canvas>
+            <p class="empty-state">Your result will appear here.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <span>GrayBox</span>
+      <span>Built to explore image processing.</span>
+    </footer>
+  </main>
 
   <script src="app.js"></script>
 </body>
